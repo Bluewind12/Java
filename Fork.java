@@ -7,17 +7,27 @@ import javafx.scene.paint.Color;
 
 public class Fork extends GUI {
     int id;
-    boolean Use = false;
+    boolean Use = false;//机の上:True 取得されている:false
 
     Fork(int i) {
         id = i;
-        System.out.println((new StringBuilder()).append(i).append("Fork Set").toString());
         ChangeFork(id, Color.BLUE);
     }
 
+    /**
+     * 持ち上げられた時の動作を示すメソッド
+     * 
+     * 持ち上げることができた場合はフィールドの Use を True にする
+     * 持ち上げられなかった場合はwaitする
+     * 
+     * @param i どの哲学者が保持しているかを示すID
+     * CUI管理時に使用される
+     */
     public synchronized void Forkup(int i) {
+        //机上かの判別
         while (Use) {
             try {
+                System.out.println("哲学者" + i + "が持ち上げる");
                 wait();
             } catch (InterruptedException interruptedexception) {
                 System.out.println(interruptedexception);
@@ -27,6 +37,11 @@ public class Fork extends GUI {
         ChangeFork(id, Color.RED);
     }
 
+    /**
+     * 持ち上げられた時の動作を示すメソッド
+     * 
+     * フィールドの Use を false にする
+     */
     public synchronized void Forkdown() {
         Use = false;
         ChangeFork(id, Color.BLUE);

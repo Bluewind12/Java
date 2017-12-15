@@ -18,39 +18,61 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
+
+    //哲学者(円)
     private static Circle[] circles = { new Circle(25), new Circle(25), new Circle(25), new Circle(25),
             new Circle(25) };
+
+    //食事(円)
     private static Circle[] food_circles = { new Circle(15), new Circle(15), new Circle(15), new Circle(15),
             new Circle(15) };
+
+    //フォーク(四角)
     private static Rectangle[] fork_Rectangles = { new Rectangle(15, 15), new Rectangle(15, 15), new Rectangle(15, 15),
             new Rectangle(15, 15), new Rectangle(15, 15) };
+
+    //哲学者の上に表記される名前
     private static Text[] name_texts = { new Text(""), new Text(""), new Text(""), new Text(""), new Text("") };
+
+    //食事の残りパーセント
     private static Text[] foodCountTexts = { new Text("残り:100%"), new Text("残り:100%"), new Text("残り:100%"),
             new Text("残り:100%"), new Text("残り:100%") };
+
+    //状態表示
     private static Text[] state_texts = { new Text(":             "), new Text(":             "),
             new Text(":             "), new Text(":             "), new Text(":             ") };
+
+    //スライダー(時間設定)
     private static Slider timeslider = new Slider(1, 5, 2);
+    //スライダー(食事回数設定)
     private static Slider foodslider = new Slider(0, 25, 5);
 
+    //スタートボタン
     private static Button Start_button = new Button("Start");
 
     public void start(Stage stage) throws Exception {
+        //ステージの設定(タイトル,サイズ)
         stage.setTitle("Five philosophers");
         stage.setWidth(750);
         stage.setHeight(500);
 
-        VBox textroot = new VBox(10);
-        VBox stateroot = new VBox(10);
-        Group drowroot = new Group();
-        HBox mainroot = new HBox(30);
+        //rootの作成
+        VBox textroot = new VBox(10); //説明を設置用
+        VBox stateroot = new VBox(10); //スライダー,状態説明設置用
+        Group drowroot = new Group(); //図を設置用
+        HBox mainroot = new HBox(30); //全体まとめ用
 
+        //説明用テキスト
         Text[] desText = { new Text("==========="), new Text("・哲学者：大きい丸"), new Text("赤色：思考中"), new Text("青色：フォーク１本所持"),
                 new Text("緑色：食事中"), new Text("灰色：食事終了"), new Text("==========="), new Text("・フォーク:四角"),
                 new Text("赤色：持たれている"), new Text("青色：置かれている"), new Text("==========="), new Text("・食事:机の上の丸"),
                 new Text("％：食事の残り") };
+        //rootにセット
         for (int i = 0; i < desText.length; i++) {
             textroot.getChildren().add(desText[i]);
         }
+
+        //ボタン設定
         Start_button.setPrefSize(100, 50);
         Start_button.setOnAction(event -> Start_button());
         textroot.getChildren().add(Start_button);
@@ -59,7 +81,7 @@ public class GUI extends Application {
         End_button.setOnAction(event -> System.exit(0));
         textroot.getChildren().add(End_button);
 
-        //スライダー
+        //時間設定スライダー設定,rootにセット(説明含め)
         stateroot.getChildren().add(new Text("待機時間(s)"));
         timeslider.setShowTickLabels(true);
         timeslider.setShowTickMarks(true);
@@ -68,6 +90,7 @@ public class GUI extends Application {
         timeslider.setSnapToTicks(true);
         stateroot.getChildren().add(timeslider);
 
+        //食事回数設定スライダー設定,rootにセット(説明含め)
         stateroot.getChildren().add(new Text("=========="));
         stateroot.getChildren().add(new Text("食事回数"));
         foodslider.setShowTickLabels(true);
@@ -77,10 +100,7 @@ public class GUI extends Application {
         foodslider.setSnapToTicks(true);
         stateroot.getChildren().add(foodslider);
 
-        stateroot.getChildren().add(new Text("=========="));
-        stateroot.getChildren().add(new Text("現在の状態"));
-
-        //座標管理
+        //座標計算・管理
         for (int i = 0; i < circles.length; i++) {
             int r = 150;
             double Delta = Math.PI / 2;
@@ -101,36 +121,46 @@ public class GUI extends Application {
             fork_Rectangles[i].setLayoutY(ty * 0.55);
         }
 
-        //図
+        //図をセット
+        //哲学者
         for (int i = 0; i < circles.length; i++) {
             circles[i].setFill(Color.CYAN);
             drowroot.getChildren().add(circles[i]);
         }
+        //食事
         for (int i = 0; i < food_circles.length; i++) {
             food_circles[i].setFill(Color.ORANGE);
             food_circles[i].setStroke(Color.BLACK);
             drowroot.getChildren().add(food_circles[i]);
         }
+        //フォーク
         for (int i = 0; i < fork_Rectangles.length; i++) {
             drowroot.getChildren().add(fork_Rectangles[i]);
         }
+        //哲学者名前
         for (int i = 0; i < name_texts.length; i++) {
             drowroot.getChildren().add(name_texts[i]);
         }
+        //食事残りパーセント
         for (int i = 0; i < name_texts.length; i++) {
             drowroot.getChildren().add(foodCountTexts[i]);
         }
+
+        //テーブル作成・セット
         Circle tablCircle = new Circle(115, null);
         tablCircle.setStroke(Color.BLACK);
-
-        //テーブル
         drowroot.getChildren().add(tablCircle);
 
         //状態
+        stateroot.getChildren().add(new Text("=========="));
+        stateroot.getChildren().add(new Text("現在の状態"));
         for (int i = 0; i < state_texts.length; i++) {
             stateroot.getChildren().add(state_texts[i]);
         }
+
+        //全体まとめ
         mainroot.getChildren().addAll(textroot, drowroot, stateroot);
+        //出力
         Scene scene = new Scene(mainroot);
         stage.setScene(scene);
         stage.show();
@@ -140,10 +170,13 @@ public class GUI extends Application {
         launch();
     }
 
-    public void ChangeP(int id, Color color) {
-        circles[id].setFill(color);
-    }
-
+    /**
+     * 状態表記用のテキストを書き換えるメソッド
+     * 
+     * @param id    哲学者のID
+     * @param state 現在の状態を表記
+     * @param name　対象(哲学者)の名前
+     */
     public void ChangeState(int id, String state, String name) {
         switch (state) {
         case "Stop":
@@ -168,10 +201,23 @@ public class GUI extends Application {
         }
     }
 
+    /**
+     * 哲学者の上に表記される名前を設定するメソッド
+     * 
+     * @param　id 哲学者のID
+     * @param name 哲学者の名前
+     */
     public void SetName(int id, String name) {
         name_texts[id].setText(name);
     }
 
+    /**
+     * スライダーの値を読み取るメソッド
+     * @param choice 読み取るスライダーの名称
+     * @return Double型で返す
+     * timeはmsで返すため、スライダーの値に1000をかけている
+     * 存在しないスライダーを指した場合は1000.0を返す　
+     */
     public Double GetSilder(String choice) {
         switch (choice) {
         case "time":
@@ -182,10 +228,35 @@ public class GUI extends Application {
         return 1000.0;
     }
 
+    /**
+    * 哲学者の円の色を変更するメソッド
+    * 
+    * @param id 哲学者のID
+    * @param color 変更する色
+    */
+    public void ChangeP(int id, Color color) {
+        circles[id].setFill(color);
+    }
+
+    /**
+    * フォークの四角の色を変更するメソッド
+    * 
+    * @param id フォークのID
+    * @param color 変更する色
+    */
     public void ChangeFork(int id, Color color) {
         fork_Rectangles[id].setFill(color);
     }
 
+    /**
+     * 食事の残りのパーセントを計算して、表示するメソッド
+     * テキストで残りパーセントを出力
+     * 食事の透過度を変更する(1:不透過　0:完全に透過)
+     * 
+     * @param id 食事のID
+     * @param　eat 現在の食事回数
+     * @param　eatMax 指定された食事回数
+     */
     public void ChangeFood(int id, Double eat, Double eatMax) {
 
         if (eatMax != 0) {
@@ -197,6 +268,10 @@ public class GUI extends Application {
         }
     }
 
+    /**
+     * ボタンが押された時に起動するメソッド
+     * ボタンを実行不可にしたのち、スレッドのための設定関数を起動する
+     */
     public void Start_button() {
         Start_button.setDisable(true);
         FxTest.ThreadStart();
