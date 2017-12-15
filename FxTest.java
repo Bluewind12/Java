@@ -2,6 +2,9 @@
 
 package FiveTest;
 
+/**
+ * 初期設定,スレッドの生成,実行を行う
+ */
 public class FxTest extends GUI {
     public static void ThreadStart() {
         //共有オブジェクト作成

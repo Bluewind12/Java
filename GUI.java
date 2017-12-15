@@ -17,6 +17,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * GUI‚Ìİ’è,•ÏX‚ğs‚¤
+ */
 public class GUI extends Application {
 
     //“NŠwÒ(‰~)

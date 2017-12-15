@@ -5,6 +5,9 @@ package FiveTest;
 import java.io.PrintStream;
 import javafx.scene.paint.Color;
 
+/**
+ * フォークが現在どの状態にあるかを判別する
+ */
 public class Fork extends GUI {
     int id;
     boolean Use = false;//机の上:True 取得されている:false

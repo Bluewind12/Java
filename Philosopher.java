@@ -5,6 +5,9 @@ package FiveTest;
 import java.io.PrintStream;
 import javafx.scene.paint.Color;
 
+/**
+ * “NŠwÒ‚Ì“®‚«‚ğŠÇ—‚·‚é
+ */
 public class Philosopher extends GUI implements Runnable {
     int id;
     String Name;
