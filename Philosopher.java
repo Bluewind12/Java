@@ -1,4 +1,5 @@
 //1601776 2EP4-58 MomoseNaoto
+
 package FiveTest;
 
 import java.io.PrintStream;
