@@ -42,7 +42,7 @@ public class Philosopher extends GUI implements Runnable {
         }
         forks = obj;
         Tablewaiter = waiter;
-        waittime = GetSilder("time").intValue() + id;
+        waittime = GetSilder("time").intValue() + (id * 5);
         eatMax = GetSilder("food");
         SetName(id, name);
     }

@@ -23,11 +23,11 @@ public class FxTest extends GUI {
 
         //設定
         //                          名前   フォーク　ウェイター
-        philosopher[0].SetPhilosopher("Aさん", fork, waiter);
-        philosopher[1].SetPhilosopher("Bさん", fork, waiter);
-        philosopher[2].SetPhilosopher("Cさん", fork, waiter);
-        philosopher[3].SetPhilosopher("Dさん", fork, waiter);
-        philosopher[4].SetPhilosopher("Eさん", fork, waiter);
+        philosopher[0].SetPhilosopher("ドリバーくん", fork, waiter);
+        philosopher[1].SetPhilosopher("ドリビーくん", fork, waiter);
+        philosopher[2].SetPhilosopher("ドリブーくん", fork, waiter);
+        philosopher[3].SetPhilosopher("ドリベーくん", fork, waiter);
+        philosopher[4].SetPhilosopher("ドリボーくん", fork, waiter);
         //スレッド生成
         Thread thread[] = new Thread[5];
 

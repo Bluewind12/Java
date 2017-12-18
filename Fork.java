@@ -30,13 +30,13 @@ public class Fork extends GUI {
         //机上かの判別
         while (Use) {
             try {
-                System.out.println("哲学者" + i + "が持ち上げる:フォークid" + id);
                 wait();
             } catch (InterruptedException interruptedexception) {
                 System.out.println(interruptedexception);
             }
         }
         Use = true;
+        System.out.println("哲学者" + i + "が持ち上げる:フォークid" + id);
         ChangeFork(id, Color.RED);
     }
 
