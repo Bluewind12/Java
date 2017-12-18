@@ -23,7 +23,15 @@ public class Philosopher extends GUI implements Runnable {
         this.id = i;
     }
 
-    //名前,IDなど set
+    /**
+     * 哲学者のフィールドを設定する
+     * また、哲学者がどのフォークを取得するかを哲学者のIDから設定する
+     * （左手：ID　右手：ID-1 とする）
+     * 
+     * @param name 哲学者の名前
+     * @param obj すべてのフォークを認識させるために使用
+     * @param waiter ウェイターを認識させるために使用
+     */
     public void SetPhilosopher(String name, Fork[] obj, Waiter waiter) {
         Name = name;
         UseLeftHand = id;
@@ -34,11 +42,14 @@ public class Philosopher extends GUI implements Runnable {
         }
         forks = obj;
         Tablewaiter = waiter;
-        waittime = GetSilder("time").intValue() + (id * 10);
+        waittime = GetSilder("time").intValue() + id;
         eatMax = GetSilder("food");
         SetName(id, name);
     }
 
+    /**
+     * 食事を行う管理メソッド
+     */
     public void Eaten() {
         //ウェイターに相談
         while (Tablewaiter.DoUse()) {
@@ -82,6 +93,9 @@ public class Philosopher extends GUI implements Runnable {
         ChangeP(id, Color.RED);
     }
 
+    /**
+     * 食事間の行う思考のためのメソッド
+     */
     public void Thinking() {
         //食事間の思考
         try {
@@ -94,6 +108,10 @@ public class Philosopher extends GUI implements Runnable {
         }
     }
 
+    /**
+     * 哲学者の行動を表すメソッド
+     * スレッド実行される
+     */
     public void run() {
         while ((eatMax - eatcount) > 0) {
             ChangeFood(id, eatcount, eatMax);
