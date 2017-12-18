@@ -46,6 +46,8 @@ public class Fork extends GUI {
      * フィールドの Use を false にする
      */
     public synchronized void Forkdown() {
+
+        System.out.println("置く:フォークid" + id);
         Use = false;
         ChangeFork(id, Color.BLUE);
         notifyAll();

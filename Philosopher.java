@@ -42,7 +42,7 @@ public class Philosopher extends GUI implements Runnable {
         }
         forks = obj;
         Tablewaiter = waiter;
-        waittime = GetSilder("time").intValue() + (id * 5);
+        waittime = GetSilder("time").intValue() + (id * 10);
         eatMax = GetSilder("food");
         SetName(id, name);
     }
@@ -57,7 +57,6 @@ public class Philosopher extends GUI implements Runnable {
                 //一時停止
 
                 System.out.println("哲学者" + id + ":ウェイターに止められた");
-
                 ChangeState(id, "Stop", Name);
                 ChangeP(id, Color.BLACK);
                 Thread.sleep(waittime);

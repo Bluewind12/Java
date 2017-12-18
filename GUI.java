@@ -67,7 +67,7 @@ public class GUI extends Application {
         VBox textroot = new VBox(10); //説明を設置用
         VBox stateroot = new VBox(10); //スライダー,状態説明設置用
         Group drowroot = new Group(); //図を設置用
-        HBox mainroot = new HBox(30); //全体まとめ用
+        HBox mainroot = new HBox(50); //全体まとめ用
 
         //説明用テキスト
         Text[] desText = { new Text("================"), new Text("・哲学者：大きい丸"), new Text("赤色：思考中"),
