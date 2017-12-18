@@ -6,6 +6,11 @@ package FiveTest;
  * 初期設定,スレッドの生成,実行を行う
  */
 public class FxTest extends GUI {
+
+    /**
+     * スレッドを作成し、実行を行うメソッド
+     * インスタンス生成もここで行う。
+     */
     public static void ThreadStart() {
         //共有オブジェクト作成
         Fork fork[] = new Fork[5];

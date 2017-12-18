@@ -55,7 +55,9 @@ public class Philosopher extends GUI implements Runnable {
         while (Tablewaiter.DoUse()) {
             try {
                 //一時停止
-                System.out.println(Name + "Stop");
+
+                System.out.println("哲学者" + id + ":ウェイターに止められた");
+
                 ChangeState(id, "Stop", Name);
                 ChangeP(id, Color.BLACK);
                 Thread.sleep(waittime);
@@ -64,6 +66,7 @@ public class Philosopher extends GUI implements Runnable {
             }
         }
         //左側取得
+        System.out.println("哲学者" + id + ":フォーク一本目持ち上げ");
         forks[UseLeftHand].Forkup(id);
         Tablewaiter.UseForkCountUP();
         ChangeState(id, "One", Name);
@@ -75,6 +78,7 @@ public class Philosopher extends GUI implements Runnable {
         }
 
         //右側取得
+        System.out.println("哲学者" + id + ":フォーク二本目持ち上げ");
         forks[UseRightHand].Forkup(id);
         ChangeP(id, Color.GREEN);
         ChangeState(id, "Eat", Name);
@@ -83,7 +87,7 @@ public class Philosopher extends GUI implements Runnable {
         } catch (InterruptedException e) {
             System.out.println(e);
         }
-        System.out.println(Name + "Eatなう");
+        System.out.println("哲学者" + id + ":食事中");
 
         //フォークを置く
         forks[UseLeftHand].Forkdown();
@@ -99,7 +103,7 @@ public class Philosopher extends GUI implements Runnable {
     public void Thinking() {
         //食事間の思考
         try {
-            System.out.println(Name + "Thinkなう");
+            System.out.println("哲学者" + id + "Thinkなう");
             ChangeState(id, "Think", Name);
             Thread.sleep(waittime);
 
@@ -118,6 +122,7 @@ public class Philosopher extends GUI implements Runnable {
             Thinking();
             Eaten();
         }
+        System.out.println("哲学者" + id + ":食事終了");
         ChangeFood(id, eatcount, eatMax);
         ChangeP(id, Color.GREY);
         ChangeState(id, "End", Name);

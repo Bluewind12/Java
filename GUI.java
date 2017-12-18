@@ -53,6 +53,10 @@ public class GUI extends Application {
     //スタートボタン
     private static Button Start_button = new Button("Start");
 
+    /**
+     * GUI表示のための設定を行うメソッド。
+     * 座標の計算、色の設定などを行う。
+     */
     public void start(Stage stage) throws Exception {
         //ステージの設定(タイトル,サイズ)
         stage.setTitle("Five philosophers");
@@ -66,10 +70,10 @@ public class GUI extends Application {
         HBox mainroot = new HBox(30); //全体まとめ用
 
         //説明用テキスト
-        Text[] desText = { new Text("==========="), new Text("・哲学者：大きい丸"), new Text("赤色：思考中"), new Text("青色：フォーク１本所持"),
-                new Text("緑色：食事中"), new Text("灰色：食事終了"), new Text("==========="), new Text("・フォーク:四角"),
-                new Text("赤色：持たれている"), new Text("青色：置かれている"), new Text("==========="), new Text("・食事:机の上の丸"),
-                new Text("％：食事の残り") };
+        Text[] desText = { new Text("================"), new Text("・哲学者：大きい丸"), new Text("赤色：思考中"),
+                new Text("青色：フォーク１本所持"), new Text("緑色：食事中"), new Text("灰色：食事終了"), new Text("================"),
+                new Text("・フォーク:四角"), new Text("赤色：持たれている"), new Text("青色：置かれている"), new Text("================"),
+                new Text("・食事:机の上の丸"), new Text("％：食事の残り") };
         //rootにセット
         for (int i = 0; i < desText.length; i++) {
             textroot.getChildren().add(desText[i]);
@@ -118,11 +122,17 @@ public class GUI extends Application {
             food_circles[i].setLayoutY(y * 0.55);
             foodCountTexts[i].setLayoutX(x * 0.55 - 30);
             foodCountTexts[i].setLayoutY(y * 0.55);
-            name_texts[i].setLayoutX(x);
+            name_texts[i].setLayoutX(x - 20);
             name_texts[i].setLayoutY(y - 30);
             fork_Rectangles[i].setLayoutX(tx * 0.55);
             fork_Rectangles[i].setLayoutY(ty * 0.55);
         }
+
+        //テーブル作成・セット
+        Circle tablCircle = new Circle(115, null);
+        tablCircle.setStroke(Color.BROWN);
+        tablCircle.setStrokeWidth(2.5);
+        drowroot.getChildren().add(tablCircle);
 
         //図をセット
         //哲学者
@@ -148,11 +158,6 @@ public class GUI extends Application {
         for (int i = 0; i < name_texts.length; i++) {
             drowroot.getChildren().add(foodCountTexts[i]);
         }
-
-        //テーブル作成・セット
-        Circle tablCircle = new Circle(115, null);
-        tablCircle.setStroke(Color.BLACK);
-        drowroot.getChildren().add(tablCircle);
 
         //状態
         stateroot.getChildren().add(new Text("=========="));

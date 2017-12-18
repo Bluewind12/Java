@@ -21,7 +21,7 @@ public class Waiter {
      * @return BooleanŒ^@
      * ‚RˆÈã‚Å‚ ‚é‚Ì‚È‚ç‚Î True ‚»‚êˆÈŠO‚Í false ‚ğ•Ô‚·
      */
-    public boolean DoUse() {
+    public synchronized boolean DoUse() {
         if (UseForks < 3) {
             return false;
         } else {
