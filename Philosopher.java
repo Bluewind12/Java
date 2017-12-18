@@ -89,9 +89,9 @@ public class Philosopher extends GUI implements Runnable {
         System.out.println("哲学者" + id + ":食事中");
 
         //フォークを置く
-        forks[UseLeftHand].Forkdown();
+        forks[UseLeftHand].Forkdown(id);
         Tablewaiter.UseForkCountDown();
-        forks[UseRightHand].Forkdown();
+        forks[UseRightHand].Forkdown(id);
         eatcount++;
         ChangeP(id, Color.RED);
     }

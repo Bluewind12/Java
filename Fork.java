@@ -44,10 +44,11 @@ public class Fork extends GUI {
      * 持ち上げられた時の動作を示すメソッド
      * 
      * フィールドの Use を false にする
+     * @param i どの哲学者が保持しているかを示すID
+     * CUI管理時に使用される
      */
-    public synchronized void Forkdown() {
-
-        System.out.println("置く:フォークid" + id);
+    public synchronized void Forkdown(int i) {
+        System.out.println("哲学者" + i + "置く:フォークid" + id);
         Use = false;
         ChangeFork(id, Color.BLUE);
         notifyAll();
